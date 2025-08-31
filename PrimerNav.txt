@@ -1,0 +1,52 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  // 🔹 Función para cerrar el menú
+  const handleCloseMenu = () => setOpen(false);
+
+  return (
+    <nav className="bg-bg text-accent-rose px-6 py-4">
+      <div className="flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold" onClick={handleCloseMenu}>
+          MiApp
+        </Link>
+
+        {/* Botón hamburguesa (mobile) */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? "✖" : "☰"}
+        </button>
+
+        {/* Links (desktop) */}
+        <ul className="hidden md:flex gap-6">
+          <li  className="px-2 rounded-sm hover:bg-accent-rose hover:text-white"><Link href="/" onClick={handleCloseMenu}>Inicio</Link></li>
+          <li className="px-2 rounded-sm hover:bg-accent-rose hover:text-white"><Link href="/about" onClick={handleCloseMenu}>Nosotros</Link></li>
+          <li className="px-2 rounded-sm hover:bg-accent-rose hover:text-white"><Link href="/contact" onClick={handleCloseMenu}>Contacto</Link></li>
+        </ul>
+        
+        <ul className="hidden md:flex gap-6">
+          <li className="mr-3 pt-1 pb-1 px-3 rounded-lg hover:border border-[var(--color-gold-strong)] hover:text-[var(--color-gold-strong)]"><Link href="/" onClick={handleCloseMenu}>Ingresar</Link></li>
+          <li className="px-3 pt-1 pb-1 rounded-lg hover:bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-gold-strong)] hover:text-white"><Link href="/alta" onClick={handleCloseMenu}>Darme de alta</Link></li>
+        </ul>
+      </div>
+
+      {/* Menu desplegable (mobile) */}
+      {open && (
+        <ul className="flex flex-col mt-4 gap-4 md:hidden">
+          <li><Link href="/" onClick={handleCloseMenu}>Inicio</Link></li>
+          <li><Link href="/about" onClick={handleCloseMenu}>Sobre mí</Link></li>
+          <li><Link href="/contact" onClick={handleCloseMenu}>Contacto</Link></li>
+          <li><Link href="/" onClick={handleCloseMenu}>Ingresar</Link></li>
+          <li><Link href="/alta" onClick={handleCloseMenu}>Darme de alta</Link></li>
+        </ul>
+      )}
+    </nav>
+  );
+}
