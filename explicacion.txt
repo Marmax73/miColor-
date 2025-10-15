@@ -1,0 +1,11 @@
+Explicación rápida
+
+En Next.js con App Router, los archivos en /app son Server Components por defecto.
+
+Los Client Components deben declararse con "use client" si usan:
+
+Hooks (useState, useEffect, useContext, etc.)
+
+Eventos (onClick, onSubmit, etc.)
+
+Acceso al window, document, localStorage, etc.

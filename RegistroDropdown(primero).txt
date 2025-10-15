@@ -1,0 +1,65 @@
+import { useState, useEffect } from "react";
+import Link from "next/link";
+
+export default function RegistroDropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detectar si es móvil para posicionar el dropdown
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint de Tailwind
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleLinkClick = () => {
+    // Se propaga al padre (Navbar), pero cierra el dropdown primero
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative inline-block text-left ">
+      <button
+        onClick={handleToggle}
+        className="p-2 py-0 text-[var(--color-accent-rose)] hover:cursor-pointer"
+      >
+        Registro
+      </button>
+
+      {isOpen && (
+        <div
+          className={`absolute mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-[var(--color-accent-rose)] ring-opacity-5 z-50  transition-all duration-800 ease-in-out transform
+
+            ${isMobile ? "left-1/5 transform -translate-x-1/4" : "left-0"}
+          `}
+        >
+          <div className="py-1">
+            <Link
+              href="/registroTienda"
+              onClick={handleLinkClick}
+              className="block px-4 py-2 text-sm text-[var(--color-accent-rose)]-700 hover:bg-gray-100"
+            >
+              Registro Tienda
+            </Link>
+            <Link
+              href="/registroCliente"
+              onClick={handleLinkClick}
+              className="block px-4 py-2 text-sm text-[var(--color-accent-rose)]-700 hover:bg-gray-100"
+            >
+              Registro Cliente
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

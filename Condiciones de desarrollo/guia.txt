@@ -1,0 +1,79 @@
+Cuando hablamos de fundamentos del software, nos referimos a los conceptos básicos, principios y componentes que sustentan la creación, funcionamiento y mantenimiento de cualquier programa informático. Te los puedo resumir de manera organizada:
+
+1. Definición de software
+
+El software es el conjunto de programas, instrucciones y datos que permiten que una computadora realice tareas específicas. Se diferencia del hardware, que son los componentes físicos del sistema.
+
+Existen dos tipos principales de software:
+
+Software de sistema: Gestiona los recursos de la computadora y permite la ejecución de programas. Ejemplo: sistemas operativos (Windows, Linux, macOS).
+
+Software de aplicación: Realiza tareas específicas para el usuario. Ejemplo: navegadores, procesadores de texto, apps móviles.
+
+Software de programación: Herramientas que ayudan a crear otros programas. Ejemplo: compiladores, IDEs, librerías.
+
+2. Componentes del software
+
+Todo software tiene componentes esenciales:
+
+Código fuente: Conjunto de instrucciones escritas en un lenguaje de programación.
+
+Datos: Información que el software utiliza o genera.
+
+Documentación: Guías, manuales y comentarios que explican el uso y funcionamiento.
+
+Interfaces: Puntos de interacción con otros programas o usuarios (UI/UX, APIs).
+
+3. Principios básicos
+
+Al desarrollar software, se siguen principios que garantizan calidad y eficiencia:
+
+Modularidad: Dividir el software en partes independientes para facilitar su comprensión y mantenimiento.
+
+Abstracción: Ocultar detalles internos y exponer solo lo necesario.
+
+Reusabilidad: Crear componentes que puedan utilizarse en distintos programas.
+
+Portabilidad: Capacidad de funcionar en diferentes sistemas sin grandes cambios.
+
+Mantenibilidad: Facilitar modificaciones y correcciones futuras.
+
+Eficiencia: Optimizar el uso de recursos (memoria, procesador, tiempo).
+
+4. Ciclo de vida del software
+
+El desarrollo de software sigue un proceso estructurado llamado ciclo de vida, que puede incluir:
+
+Análisis de requerimientos: Entender qué necesita el usuario.
+
+Diseño: Planificar la arquitectura y estructura del software.
+
+Implementación o codificación: Escribir el código.
+
+Pruebas (testing): Verificar que funcione correctamente.
+
+Despliegue: Ponerlo en producción.
+
+Mantenimiento: Corregir errores y actualizar funcionalidades.
+
+5. Lenguajes de programación
+
+El software se desarrolla usando lenguajes de programación, que pueden ser:
+
+Lenguajes de bajo nivel: Cercanos al hardware (ensamblador).
+
+Lenguajes de alto nivel: Más cercanos al lenguaje humano (Python, Java, C#).
+
+Lenguajes de scripting: Automatizan tareas (JavaScript, Bash).
+
+6. Buenas prácticas
+
+Versionado del código (Git, SVN)
+
+Documentación clara y actualizada
+
+Pruebas unitarias y de integración
+
+Seguridad y control de acceso
+
+Gestión eficiente de recursos
