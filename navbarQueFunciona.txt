@@ -18,12 +18,7 @@ export default function Navbar() {
             className="text-2xl font-bold"
             onClick={handleCloseMenu}
           >
-            <p className="mi-color">
-              miC
-              <span className="heart" aria-hidden="true">o</span>
-              lor
-              <span className="sr-only">miColor con corazón</span>
-            </p>
+            <p className="mi-color">miC<span className="heart" aria-hidden="true">o</span>lor<span className="sr-only">miColor con corazón</span></p>
           </Link>
 
           {/* Links principales (solo desktop) */}
@@ -54,7 +49,7 @@ export default function Navbar() {
             <Link href="/" onClick={handleCloseMenu}>Ingresar</Link>
           </li>
           <li className="px-3 pt-1 pb-1 rounded-lg hover:border border-[var(--color-accent-rose)]] hover:text-white justify-items-start">
-            <RegistroDropdown onLinkClick={handleCloseMenu} />
+            <RegistroDropdown />
           </li>
         </ul>
       </div>
@@ -65,10 +60,8 @@ export default function Navbar() {
           <li><Link href="/" onClick={handleCloseMenu}>Inicio</Link></li>
           <li><Link href="/about" onClick={handleCloseMenu}>Nosotros</Link></li>
           <li><Link href="/contact" onClick={handleCloseMenu}>Contacto</Link></li>
-          <li className="hover:scale-105 hover:border border[var(--color-accent-rose) hover:text-center] hover:rounded-md pl-2">
-            <Link href="/" onClick={handleCloseMenu}>Ingresar</Link>
-          </li>
-          <RegistroDropdown onLinkClick={handleCloseMenu} />
+          <li className= "hover:scale-105 hover:border border[var(--color-accent-rose) hover:text-center] hover:rounded-md  pl-2"><Link href="/" onClick={handleCloseMenu} >Ingresar</Link></li>
+          <RegistroDropdown />
         </ul>
       )}
     </nav>
