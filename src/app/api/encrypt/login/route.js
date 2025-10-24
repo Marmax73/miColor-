@@ -1,6 +1,6 @@
-import prisma from "@/app/utils/db";
-import { verificarPassword } from "@/app/utils/bcrypt";
-import { generarToken } from "@/app/utils/jwt";
+import prisma from "../../../../../utils/db'";
+import { verificarPassword } from '../../../../../utils/bcrypt';
+import { generarToken } from '../../../../../utils/jwt';
 
 export async function POST(req) {
   try {

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import bcrypt from "bcryptjs";
+import bcrypt from "./../../utils/bcrypt"; // ✅ importación correcta
 
 
 import prisma from "@/src/lib/prisma"; // ✅ importación correcta
