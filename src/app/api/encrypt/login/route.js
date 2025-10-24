@@ -1,6 +1,7 @@
-import prisma from '../../../../utils/db';
-import { generarToken } from '../../../../utils/jwt';
-import bcrypt from '../../utils/bcrypt'; // ✅ default export
+import prisma from '@/app/utils/db';
+import { generarToken } from '@/app/utils/jwt';
+import bcrypt from '@/app/utils/bcrypt';
+
 
 export async function POST(req) {
   try {
