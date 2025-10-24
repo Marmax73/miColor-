@@ -1,4 +1,4 @@
-import prisma from '@/app/utils/db';
+import prisma from '@/app/utils/db.js';
 import { generarToken } from '@/utils/jwt';
 import bcrypt from '@/utils/bcrypt';
 
