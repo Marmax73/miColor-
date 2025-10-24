@@ -2,8 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import CameraButton from './CameraButton';
-import { getDominantColor } from '../../utils/camaraColor/getDominantColor';
-import { getPantoneName } from '../../utils/camaraColor/getPantoneName';
+import { getDominantColor } from '../../../utils/camaraColor/getDominantColor';
+import { getPantoneName } from '../../../utils/camaraColor/getPantoneName';
 
 export default function CameraCapture() {
   const videoRef = useRef(null);
