@@ -1,17 +1,13 @@
 import { NextResponse } from "next/server";
-
-import bcrypt from "./../../utils/bcrypt"; // ✅ importación correcta
-
-
+import bcrypt from "./../../utils/bcrypt"; // ✅ default export
 import prisma from "@/src/lib/prisma"; // ✅ importación correcta
 
 export async function POST(request) {
   try {
     const body = await request.json();
-
     const { nombre, apellido, telefono, localidad, direccion, cuit, email, password, perfil } = body;
 
-     // 🔹 Validar que el perfil sea válido
+    // 🔹 Validar que el perfil sea válido
     if (!perfil || !['userCliente', 'userTienda'].includes(perfil)) {
       return NextResponse.json(
         { message: 'Perfil inválido. Debe ser userCliente o userTienda.' },
@@ -29,7 +25,7 @@ export async function POST(request) {
 
     // 🔹 Validar campos específicos según el perfil
     if (perfil === 'userTienda') {
-      if (!direccionComercial || !cuit) {
+      if (!direccion || !cuit) {
         return NextResponse.json(
           { message: 'Faltan campos obligatorios para Tienda.' },
           { status: 400 }
@@ -38,21 +34,18 @@ export async function POST(request) {
     }
 
     // Verificar si el usuario ya existe
-    const existingUser = await prisma.user.findUnique({
-      where: { email },
-    });
-
+    const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
       return NextResponse.json({ message: "El usuario ya existe" }, { status: 400 });
     }
 
     // Encriptar contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10); // ✅ default export
 
     // Crear usuario
     const newUser = await prisma.user.create({
       data: {
-        perfil: perfil || "userTienda", // si no viene, por defecto userTienda
+        perfil: perfil || "userTienda",
         nombre,
         apellido,
         telefono,
@@ -63,15 +56,14 @@ export async function POST(request) {
         password: hashedPassword,
       },
     });
-    
-     
-     console.log("Datos que se van a insertar en DB:", newUser);
 
-    // Respuesta en JSON
+    console.log("Datos que se van a insertar en DB:", newUser);
+
     return NextResponse.json({
       message: "Usuario creado exitosamente",
       user: { id: newUser.id, email: newUser.email },
     });
+
   } catch (error) {
     console.error('❌ Error en /api/register:', error);
     return NextResponse.json(

@@ -1,26 +1,42 @@
-import prisma from "../../../../../utils/db'";
-import { verificarPassword } from '../../../../../utils/bcrypt';
-import { generarToken } from '../../../../../utils/jwt';
+import prisma from '../../../../utils/db';
+import { generarToken } from '../../../../utils/jwt';
+import bcrypt from '../../utils/bcrypt'; // ✅ default export
 
 export async function POST(req) {
   try {
     const { email, password } = await req.json();
+
+    // Buscar usuario en DB
     const user = await prisma.user.findUnique({ where: { email } });
-
     if (!user) {
-      return Response.json({ error: "Usuario no encontrado" }, { status: 404 });
+      return new Response(
+        JSON.stringify({ error: "Usuario no encontrado" }),
+        { status: 404 }
+      );
     }
 
-    const valid = await verificarPassword(password, user.password);
+    // Verificar contraseña
+    const valid = await bcrypt.compare(password, user.password); // ✅ default export
     if (!valid) {
-      return Response.json({ error: "Contraseña incorrecta" }, { status: 401 });
+      return new Response(
+        JSON.stringify({ error: "Contraseña incorrecta" }),
+        { status: 401 }
+      );
     }
 
+    // Generar token JWT
     const token = generarToken({ id: user.id, email: user.email });
 
-    return Response.json({ success: true, token });
+    return new Response(
+      JSON.stringify({ success: true, token }),
+      { status: 200 }
+    );
+
   } catch (err) {
     console.error("❌ Error en login:", err);
-    return Response.json({ error: "Error en el servidor" }, { status: 500 });
+    return new Response(
+      JSON.stringify({ error: "Error en el servidor" }),
+      { status: 500 }
+    );
   }
 }
