@@ -1,20 +1,17 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = process.env.JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET || 'clave_super_secreta';
 
-if (!SECRET_KEY) {
-  throw new Error("❌ JWT_SECRET no está definido en las variables de entorno");
+// 🔹 Generar token
+export function generarToken(payload) {
+  return jwt.sign(payload, SECRET_KEY, { expiresIn: '7d' });
 }
 
-export function encryptData(data) {
-  return jwt.sign(data, SECRET_KEY, { expiresIn: "1h" });
-}
-
-export function decryptData(token) {
+// 🔹 Verificar token
+export function verificarToken(token) {
   try {
     return jwt.verify(token, SECRET_KEY);
-  } catch (err) {
+  } catch (error) {
     return null;
   }
 }
-
