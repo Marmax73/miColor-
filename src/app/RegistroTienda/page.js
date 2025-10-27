@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { validateName, validateCuit, validateEmail, validateApellido, validatePassword, validatePhone } from '../../utils/validations/validations.js';
+import { validateName, validateCuit, validateEmail, validateApellido, validatePassword, validatePhone } from '@/src/utils/validations/validations.js';
 //import { Perfil } from '@/src/generated/prisma/client.js';
 
 const UserForm = () => {
