@@ -1,5 +1,10 @@
-import prisma from '@/app/utils/db.js';
-import { generarToken } from '@/utils/jwt';
+
+
+
+
+import prisma from '@/utils/db';
+import jwtUtils from '@/utils/jwt';
+
 import bcrypt from '@/utils/bcrypt';
 
 
@@ -26,7 +31,7 @@ export async function POST(req) {
     }
 
     // Generar token JWT
-    const token = generarToken({ id: user.id, email: user.email });
+    const token = jwtUtils({ id: user.id, email: user.email });
 
     return new Response(
       JSON.stringify({ success: true, token }),
