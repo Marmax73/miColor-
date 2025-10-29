@@ -5,7 +5,10 @@
       "@/*": ["*"],
       "@/utils/*": ["utils/*"],
       "@/utils/validations/*": ["utils/validations/*"],
-      "@/utils/encrypt/*": ["utils/encrypt/*"]
+      "@/utils/encrypt/*": ["utils/encrypt/*"],
+      "@/utils/bcrypt": ["utils/bcrypt.js"],
+      "@/utils/jwt": ["utils/jwt.js"],
+      "@/utils/db": ["utils/db.js"]
     }
   },
   "include": ["src"]
