@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@/utils/*": ["utils/*"],
+      "@/utils/validations/*": ["utils/validations/*"],
+      "@/utils/encrypt/*": ["utils/encrypt/*"]
     }
-  }
+  },
+  "include": ["src"]
 }
