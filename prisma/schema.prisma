@@ -1,3 +1,9 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -6,31 +12,36 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  directUrl = env("PRISMA_DATABASE_URL")
 }
 
 model User {
-  id                 Int          @id @default(autoincrement())
-  perfil             Perfil
+  id                 Int          @id @default(autoincrement())  // identificador único
+  perfil             Perfil       // enum: userCliente | userTienda
+
   nombre             String
   apellido           String
+  telefono           String
   localidad          String
-  direccionComercial String?
-  cuit               String?
-  creadoEn           DateTime     @default(now())
+
   email              String       @unique
   password           String
-  telefono           String
+
+  // Campos adicionales SOLO para userTienda
+  direccionComercial String?      // coincide con "direccion" del form
+  cuit               String?      
+
   multimedia         Multimedia[]
+
+  creadoEn           DateTime     @default(now())
 }
 
 model Multimedia {
-  id       Int       @id @default(autoincrement())
-  tipo     TipoMedia
-  url      String
-  userId   Int
-  creadoEn DateTime  @default(now())
-  user     User      @relation(fields: [userId], references: [id])
+  id        Int        @id @default(autoincrement())
+  tipo      TipoMedia
+  url       String
+  user      User       @relation(fields: [userId], references: [id])
+  userId    Int
+  creadoEn  DateTime   @default(now())
 }
 
 enum Perfil {
