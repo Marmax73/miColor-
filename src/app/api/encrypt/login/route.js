@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import db from "../../../utils/db.js";
-import jwtUtils from "../../../utils/jwt.js";
-import bcryptUtils from "../../../utils/bcrypt.js";
-import { validarCampos } from "../../../utils/validations/validations.js";
+import db from "@/utils/db.js";
+import jwtUtils from "@/utils/jwt.js";
+import bcryptUtils from "@/utils/bcrypt.js";
+import { validarCampos } from "@/utils/validations/validations.js";
 
 export async function POST(req) {
   try {
