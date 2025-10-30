@@ -6,7 +6,7 @@ import {
   validateApellido,
   validatePassword,
   validatePhone
-} from 'src/utils/validations/validations.js';
+} from '/src/utils/validations/validations.js';
 
 const UserForm = () => {
   const [formData, setFormData] = useState({
