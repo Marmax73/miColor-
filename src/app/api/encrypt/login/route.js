@@ -1,47 +1,46 @@
-
-
-
-
-import prisma from '@/utils/db';
-import jwtUtils from '@/utils/jwt';
-
-import bcrypt from '@/utils/bcrypt';
-
+import { NextResponse } from "next/server";
+import db from "../../../utils/db.js";
+import jwtUtils from "../../../utils/jwt.js";
+import bcryptUtils from "../../../utils/bcrypt.js";
+import { validarCampos } from "../../../utils/validations/validations.js";
 
 export async function POST(req) {
   try {
-    const { email, password } = await req.json();
+    const data = await req.json();
 
-    // Buscar usuario en DB
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      return new Response(
-        JSON.stringify({ error: "Usuario no encontrado" }),
-        { status: 404 }
-      );
+    // Validar campos
+    const errores = validarCampos(data);
+    if (errores.length > 0) {
+      return NextResponse.json({ error: errores.join(", ") }, { status: 400 });
     }
 
-    // Verificar contraseña
-    const valid = await bcrypt.compare(password, user.password); // ✅ default export
-    if (!valid) {
-      return new Response(
-        JSON.stringify({ error: "Contraseña incorrecta" }),
-        { status: 401 }
-      );
+    // Buscar usuario
+    const user = await db.user.findUnique({
+      where: { email: data.email },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
+    }
+
+    // Validar contraseña
+    const passwordValido = await bcryptUtils.comparePasswords(
+      data.password,
+      user.password
+    );
+
+    if (!passwordValido) {
+      return NextResponse.json({ error: "Contraseña incorrecta" }, { status: 401 });
     }
 
     // Generar token JWT
-    const token = jwtUtils({ id: user.id, email: user.email });
+    const token = jwtUtils.encryptData({ id: user.id, email: user.email });
 
-    return new Response(
-      JSON.stringify({ success: true, token }),
-      { status: 200 }
-    );
-
-  } catch (err) {
-    console.error("❌ Error en login:", err);
-    return new Response(
-      JSON.stringify({ error: "Error en el servidor" }),
+    return NextResponse.json({ success: true, token });
+  } catch (error) {
+    console.error("❌ Error en login:", error);
+    return NextResponse.json(
+      { error: "Error interno del servidor" },
       { status: 500 }
     );
   }
