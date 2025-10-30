@@ -1,4 +1,4 @@
-// validations.js
+// src/utils/validations/validations.js
 
 // Validación para nombres en español (mínimo 3 caracteres)
 export const validateName = (nombre) => {
@@ -6,14 +6,9 @@ export const validateName = (nombre) => {
   return regex.test(nombre);
 };
 
-// // Validación para apellidos en español (mínimo 3 caracteres)
-// export const validateApellido = (apellido) => {
-//   return /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]{3,50}$/.test(apellido);
-// };
-
+// Validación para apellidos en español (mínimo 3 caracteres)
 export const validateApellido = (apellido) => {
   if (!apellido) return false; // no nulo ni vacío
-
   const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]{3,50}$/;
   return regex.test(apellido.trim());
 };
@@ -37,3 +32,30 @@ export const validatePhone = (phone) => {
 export const validatePassword = (password) => {
   return /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(password);
 };
+
+// ✅ Función agrupadora para validaciones generales
+export function validarCampos(data) {
+  const errores = {};
+
+  if (data.nombre && !validateName(data.nombre))
+    errores.nombre = "Nombre inválido o demasiado corto";
+
+  if (data.apellido && !validateApellido(data.apellido))
+    errores.apellido = "Apellido inválido o demasiado corto";
+
+  if (data.email && !validateEmail(data.email))
+    errores.email = "Correo electrónico inválido";
+
+  if (data.password && !validatePassword(data.password))
+    errores.password =
+      "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo";
+
+  if (data.cuit && !validateCuit(data.cuit))
+    errores.cuit = "CUIT inválido (formato esperado XX-XXXXXXXX-X)";
+
+  if (data.phone && !validatePhone(data.phone))
+    errores.phone = "Teléfono inválido";
+
+  // Retorna null si no hay errores, o el objeto con mensajes
+  return Object.keys(errores).length > 0 ? errores : null;
+}
