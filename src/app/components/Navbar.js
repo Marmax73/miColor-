@@ -18,12 +18,10 @@ export default function Navbar() {
             className="text-2xl font-bold"
             onClick={handleCloseMenu}
           >
-            <p className="mi-color">
-              miC
-              <span className="heart" aria-hidden="true">o</span>
-              lor
-              <span className="sr-only">miColor con corazón</span>
-            </p>
+          <h1 className="text-3xl font-bold text-[var(--color-accent-rose)] hover:text-white">       
+            Vidriera
+          </h1>
+            
           </Link>
 
           {/* Links principales (solo desktop) */}
