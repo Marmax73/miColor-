@@ -1,12 +1,13 @@
 // testDB.js
-import prisma from "./src/utils/db.js";
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 async function testDB() {
   try {
-    const users = await prisma.user.findMany(); // Cambia 'user' por el modelo que tengas
-    console.log("✅ Conexión exitosa. Usuarios encontrados:", users.length);
+    const users = await prisma.user.findMany();
+    console.log("✅ Conexión OK. Usuarios:", users);
   } catch (err) {
-    console.error("❌ Error al conectar con la base de datos:", err.message);
+    console.error("❌ Error conexión:", err.message);
   } finally {
     await prisma.$disconnect();
   }
