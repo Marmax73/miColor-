@@ -57,6 +57,7 @@ export async function POST(request) {
         password: hashedPassword,
       },
     });
+    console.log("✅ Registro creado:", newUser);
 
     console.log("Datos que se van a insertar en DB:", newUser);
 

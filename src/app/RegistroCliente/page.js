@@ -55,7 +55,10 @@ const UserForm = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            formData,
+            perfil: 'userCliente'
+          }),
         });
 
         const rawText = await response.text(); // ⚠ obtenemos SIEMPRE el cuerpo como texto
