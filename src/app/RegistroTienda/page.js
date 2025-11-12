@@ -52,7 +52,9 @@ const UserForm = () => {
                 const response = await fetch("/api/register", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify({
+                        ...formData,
+                        perfil: "userTienda"}),
                 });
 
                 const contentType = response.headers.get("content-type");

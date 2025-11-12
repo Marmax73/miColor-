@@ -56,7 +56,7 @@ const UserForm = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            formData,
+            ...formData,
             perfil: 'userCliente'
           }),
         });
