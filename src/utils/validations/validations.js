@@ -30,7 +30,8 @@ export const validatePhone = (phone) => {
 
 // Validación contraseña segura (8+ chars, 1 mayúscula, 1 número, 1 especial)
 export const validatePassword = (password) => {
-  return /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/.test(password);
+  return /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,17}$/.test(password);
+
 };
 
 // ✅ Función agrupadora para validaciones generales

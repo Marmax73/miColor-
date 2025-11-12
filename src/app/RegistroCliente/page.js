@@ -9,6 +9,7 @@ import {
 } from '@/utils/validations/validations';
 
 const UserForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     perfil: 'userCliente',
     nombre: '',
@@ -43,7 +44,7 @@ const UserForm = () => {
       validationErrors.email = 'Email inválido';
     }
     if (!validatePassword(formData.password)) {
-      validationErrors.password = 'La contraseña debe tener 8+ caracteres, 1 mayúscula, 1 número y 1 caracter especial';
+      validationErrors.password = 'La contraseña debe tener entre 8 y 17 caracteres, 1 mayúscula, al menos 1 número y 1 caracter especial';
     }
 
     if (Object.keys(validationErrors).length === 0) {
@@ -113,6 +114,7 @@ const UserForm = () => {
           { id: 'email', label: 'Email', type: 'email' },
           { id: 'password', label: 'Contraseña', type: 'password' }
         ].map(({ id, label, type = 'text' }) => (
+          
           <div key={id} className="mb-4">
             <label
               htmlFor={id}
@@ -128,6 +130,18 @@ const UserForm = () => {
               onChange={handleChange}
               className="w-full border border-[#666666] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
             />
+
+            {/* 👁️ Solo mostrar botón en el campo de contraseña */}
+            {id === 'password' && (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[38px] text-[#666666]"
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
+            )}
+
             {errors[id] && (
               <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
             )}
