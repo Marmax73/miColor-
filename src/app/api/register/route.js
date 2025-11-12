@@ -33,6 +33,7 @@ export async function POST(request) {
         );
       }
     }
+    console.log("bcrypt disponible:", typeof bcrypt.hash);
 
     // Verificar si el usuario ya existe
     const existingUser = await prisma.user.findUnique({ where: { email } });
