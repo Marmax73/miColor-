@@ -1,4 +1,4 @@
-import bcryptLib from '../utils/bcryptLib.js';
+import bcryptLib from '@/utils/bcryptLib.js';
 
 const bcrypt = {
   hash: async (password, saltRounds = 10) => {
