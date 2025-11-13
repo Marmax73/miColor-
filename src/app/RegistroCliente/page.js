@@ -99,7 +99,7 @@ const UserForm = () => {
   };
 
   return (
-    <div className="mt-24 w-full px-4 lg:w-[30%] mx-auto">
+    <div className="mt-24 w-full px-4 lg:w-[30%] mx-auto mb-1rem">
       <form
         onSubmit={handleSubmit}
         className="border-2 border-[#DB5F7A] rounded-lg p-6 shadow-md bg-white"
@@ -122,25 +122,28 @@ const UserForm = () => {
             >
               {label}
             </label>
-            <input
-              type={type}
-              id={id}
-              name={id}
-              value={formData[id]}
-              onChange={handleChange}
-              className="w-full border border-[#666666] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
-            />
 
-            {/* 👁️ Solo mostrar botón en el campo de contraseña */}
-            {id === 'password' && (
-            <button
-              type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-[38px] text-[#666666]"
-            >
-              {showPassword ? '🙈' : '👁️'}
-            </button>
-            )}
+            <div className="relative w-full">
+              <input
+                type={id === 'password' && showPassword ? 'text' : type}
+                id={id}
+                name={id}
+                value={formData[id]}
+                onChange={handleChange}
+                className="w-full border border-[#666666] rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
+              />
+
+              {/* 👁️ Solo mostrar botón en el campo de contraseña */}
+              {id === 'password' && (
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center text-[#666666]"
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              )}
+            </div>
 
             {errors[id] && (
               <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
@@ -156,6 +159,7 @@ const UserForm = () => {
         </button>
       </form>
     </div>
+
   );
 };
 

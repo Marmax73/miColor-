@@ -4,6 +4,7 @@ import { validateName, validateCuit, validateEmail, validateApellido, validatePa
 //import { Perfil } from '@/src/generated/prisma/client.js';
 
 const UserForm = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         perfil: 'userTienda',
         nombre: '',
@@ -100,51 +101,76 @@ const UserForm = () => {
 
     return (
         <div className="mt-10 w-full px-4 lg:w-[30%] mx-auto">
-            <form 
-                onSubmit={handleSubmit} 
-                className="border-2 border-[#DB5F7A] rounded-lg p-6 shadow-md bg-white"
+      <form 
+        onSubmit={handleSubmit} 
+        className="border-2 border-[#DB5F7A] rounded-lg p-6 shadow-md bg-white"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-center text-[#DB5F7A]">
+          Registro tienda
+        </h2>
+
+        {[
+          { id: 'nombre', label: 'Nombre' },
+          { id: 'apellido', label: 'Apellido' },
+          { id: 'telefono', label: 'Teléfono' },
+          { id: 'localidad', label: 'Localidad' },
+          { id: 'direccion', label: 'Dirección' },
+          { id: 'cuit', label: 'CUIT' },
+          { id: 'email', label: 'Email', type: 'email' },
+          { id: 'password', label: 'Contraseña', type: 'password' },
+        ].map(({ id, label, type = 'text' }) => (
+          <div key={id} className="mb-4">
+            <label 
+              htmlFor={id} 
+              className="block text-sm font-medium text-[#666666] mb-1"
             >
-                <h2 className="text-2xl font-semibold mb-6 text-center text-[#DB5F7A]">Registro tienda</h2>
+              {label}
+            </label>
 
-                {[
-                    { id: 'nombre', label: 'Nombre' },
-                    { id: 'apellido', label: 'Apellido' },
-                    { id: 'telefono', label: 'Teléfono' },
-                    { id: 'localidad', label: 'Localidad' },
-                    { id: 'direccion', label: 'Dirección' },
-                    { id: 'cuit', label: 'CUIT' },
-                    { id: 'email', label: 'Email', type: 'email' },
-                    { id: 'password', label: 'Contraseña', type: 'password' },
-                ].map(({ id, label, type = 'text' }) => (
-                    <div key={id} className="mb-4">
-                        <label 
-                            htmlFor={id} 
-                            className="block text-sm font-medium text-[#666666] mb-1"
-                        >
-                            {label}
-                        </label>
-                        <input
-                            type={type}
-                            id={id}
-                            name={id}
-                            value={formData[id]}
-                            onChange={handleChange}
-                            className="w-full border border-[#666666] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
-                        />
-                        {errors[id] && (
-                            <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
-                        )}
-                    </div>
-                ))}
-
-                <button 
-                    type="submit"
-                    className="w-full bg-[#DB5F7A] text-white py-2 rounded-md hover:bg-[#c44e6a] transition-colors"
+            {/* Campo especial para contraseña */}
+            {id === 'password' ? (
+              <div className="relative w-full">
+                <input
+                  type={showPassword ? 'text' : type}
+                  id={id}
+                  name={id}
+                  value={formData[id]}
+                  onChange={handleChange}
+                  className="w-full border border-[#666666] rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-3 flex items-center text-[#666666]"
                 >
-                    Registrarse
+                  {showPassword ? '🙈' : '👁️'}
                 </button>
-            </form>
-        </div>
+              </div>
+            ) : (
+              <input
+                type={type}
+                id={id}
+                name={id}
+                value={formData[id]}
+                onChange={handleChange}
+                className="w-full border border-[#666666] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#DB5F7A] text-[#666666]"
+              />
+            )}
+
+            {errors[id] && (
+              <p className="text-sm text-red-500 mt-1">{errors[id]}</p>
+            )}
+          </div>
+        ))}
+
+        <button 
+          type="submit"
+          className="w-full bg-[#DB5F7A] text-white py-2 rounded-md hover:bg-[#c44e6a] transition-colors"
+        >
+          Registrarse
+        </button>
+      </form>
+    </div>
     );
 };
 
