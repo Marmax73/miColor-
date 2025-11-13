@@ -1,13 +1,13 @@
-import bcryptLib from '@/utils/bcryptLib.js';
+import bcrypt from 'bcryptjs';
 
-const bcrypt = {
+const bcryptUtils = {
   hash: async (password, saltRounds = 10) => {
-    const salt = await bcryptLib.genSalt(saltRounds);
-    return bcryptLib.hash(password, salt);
+    const salt = await bcrypt.genSalt(saltRounds);
+    return bcrypt.hash(password, salt);
   },
   compare: async (password, hash) => {
-    return bcryptLib.compare(password, hash);
-  }
+    return bcrypt.compare(password, hash);
+  },
 };
 
-export default bcrypt;
+export default bcryptUtils;
